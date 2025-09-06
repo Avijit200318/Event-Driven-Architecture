@@ -6,6 +6,9 @@ const prismaClientSingleTon = () => {
     return new PrismaClient();
 }
 
+type prismaClientSingleTon = ReturnType<typeof prismaClientSingleTon>;
+// this line typescrip says this 'prismaClientSingleTon' always return this type.
+
 const globalForPrisma = global as unknown as { prisma: PrismaClient | undefined };
 
 const prisma = globalForPrisma.prisma ?? prismaClientSingleTon();
