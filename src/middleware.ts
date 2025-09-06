@@ -5,7 +5,7 @@ import { clerkClient } from '@clerk/nextjs/server';
 
 const publicRoutes = [
   "/",
-  "/api/webhook/register",
+  "/api/webhooks/register",
   "/sign-up",
   "/sign-in"
 ];
