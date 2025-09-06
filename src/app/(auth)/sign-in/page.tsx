@@ -87,6 +87,7 @@ export default function page() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
+                <div id="clerk-captcha"></div>
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
