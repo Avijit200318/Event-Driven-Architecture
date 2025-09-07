@@ -208,3 +208,83 @@ The request body must be a JSON object with the following property:
   "success": true
 }
 ```
+## Endpoint: `/api/todos/[id (your todo id here)]`
+
+### Description
+This endpoint allows an authenticated user to delete a specific todo item by its ID.  
+Only the owner of the todo can delete it. Unauthorized access or invalid todo IDs are handled appropriately.
+
+### Method
+`DELETE`
+
+### Authentication
+✅ Authentication required (Clerk).
+
+### Path Parameters
+
+| Parameter | Type   | Description              | Required |
+|----------|------|--------------------------|----------|
+| `id`      | string | The unique identifier of the todo to delete. | ✅ |
+
+Example URL:
+```
+/api/todos/975829489859kdjkf
+```
+### Example Responses
+
+#### ✅ Success Response (201)
+```json
+{
+  "message": "Todo deleted successfully",
+  "success": true
+}
+```
+## Endpoint: `/api/todos/[id (todo user id)]`
+
+### Description
+This endpoint allows an authenticated user to update the completion status of a specific todo item by its ID.  
+Only the owner of the todo can update it.
+
+### Method
+`PUT`
+
+### Authentication
+✅ Authentication required (Clerk).
+
+### Path Parameters
+
+| Parameter | Type   | Description                  | Required |
+|----------|------|------------------------------|----------|
+| `id`      | string | The unique identifier of the todo to update. | ✅ |
+
+Example URL:
+```
+/api/todos/758724jfdjfk8784
+```
+### Request Body
+
+The request body must be a JSON object with the following property:
+
+| Key       | Type    | Description                 | Required |
+|-----------|-------|------------------------------|----------|
+| `completed` | boolean | The new completion status of the todo item. | ✅ |
+
+Example:
+```json
+{
+  "completed": true
+}
+```
+```json
+{
+  "message": "Todo is updated",
+  "updatedTodo": {
+    "id": "todo_789",
+    "title": "Buy groceries",
+    "completed": true,
+    "userId": "user_abc",
+    "createdAt": "2025-09-06T15:10:00.000Z",
+    "updatedAt": "2025-09-06T15:12:00.000Z"
+  }
+}
+```
