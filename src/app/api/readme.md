@@ -109,3 +109,102 @@ No request body required.
 }
 
 ```
+
+## Endpoint: `/api/todos`
+
+### Description
+This endpoint retrieves a paginated list of todo items for the authenticated user.  
+It supports searching by title with case-insensitive matching and returns todos ordered by creation date in descending order.
+
+### Method
+`GET`
+
+### Authentication
+✅ Authentication required (Clerk).
+
+### Query Parameters
+
+| Parameter | Type   | Description                       | Required |
+|----------|-------|----------------------------------|----------|
+| `page`    | number | The page number for pagination. Defaults to `1` if not provided. | ❌ |
+| `search`  | string | Search term to filter todos by title (case insensitive). Defaults to empty string if not provided. | ❌ |
+
+---
+
+### Example Request
+```
+/api/todos?page=2&search=meeting
+```
+---
+
+### Example Response
+
+#### ✅ Success Response (200)
+```json
+{
+  "todos": [
+    {
+      "id": "todo_123",
+      "title": "Team meeting notes",
+      "completed": false,
+      "userId": "user_abc",
+      "createdAt": "2025-09-06T12:45:30.000Z",
+      "updatedAt": "2025-09-06T12:45:30.000Z"
+    },
+    {
+      "id": "todo_456",
+      "title": "Prepare slides for meeting",
+      "completed": true,
+      "userId": "user_abc",
+      "createdAt": "2025-09-05T08:20:10.000Z",
+      "updatedAt": "2025-09-05T08:20:10.000Z"
+    }
+  ],
+  "currentPage": 2,
+  "totalPages": 5
+}
+```
+## Endpoint: `/api/todos`
+
+### Description
+This endpoint allows an authenticated user to create a new todo item.  
+It enforces a restriction that free users can create a maximum of 3 todos.  
+Subscribed users have no limit on the number of todos they can create.
+
+### Method
+`POST`
+
+### Authentication
+✅ Authentication required (Clerk).
+
+### Request Body
+The request body must be a JSON object with the following property:
+
+| Key   | Type   | Description               | Required |
+|------|------|---------------------------|----------|
+| `title` | string | The title of the new todo item. | ✅ |
+
+### Example Request
+```json
+{
+  "title": "Buy groceries"
+}
+```
+---
+### Example Response
+
+#### ✅ Success Response (200)
+```json
+{
+  "message": "",
+  "todo": {
+    "id": "todo_789",
+    "title": "Buy groceries",
+    "completed": false,
+    "userId": "user_abc",
+    "createdAt": "2025-09-06T15:10:00.000Z",
+    "updatedAt": "2025-09-06T15:10:00.000Z"
+  },
+  "success": true
+}
+```
