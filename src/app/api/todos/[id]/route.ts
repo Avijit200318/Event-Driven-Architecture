@@ -15,6 +15,8 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
 
     try {
         const todoId = params.id;
+        // const { id: todoId } = await params;
+        // new way to get the params
         const todo = await prisma.todo.findUnique({
             where: { id: todoId }
         })
