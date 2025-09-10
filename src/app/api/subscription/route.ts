@@ -35,8 +35,9 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
             message: "Subscription Added",
             subscriptionEnds: updateUser.subscriptionEnds,
+            isSubscribed: updateUser.isSubscribed,
             success: true
-        }, { status: 2001 });
+        }, { status: 201 });
     } catch (error) {
         console.log("Error: ", error);
         return NextResponse.json(
